@@ -11,7 +11,6 @@ import static eu.skymmel.rpsgame.assets.Colors.*;
 import static eu.skymmel.rpsgame.assets.Icons.*;
 
 public class Menu {
-    Scanner scanner = new Scanner(System.in);
     public static void menu() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
