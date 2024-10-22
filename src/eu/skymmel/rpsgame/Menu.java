@@ -7,36 +7,38 @@ import java.util.Random;
 import java.util.Scanner;
 
 import static eu.skymmel.rpsgame.Game.getChoose;
+import static eu.skymmel.rpsgame.assets.Colors.*;
+import static eu.skymmel.rpsgame.assets.Icons.*;
 
 public class Menu {
     Scanner scanner = new Scanner(System.in);
     public static void menu() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("\n---[ G A M E   M E N U ]---\n");
-            System.out.println("1 = Single player");
-            System.out.println("2 = Host server");
-            System.out.println("3 = Join server");
-            System.out.println("4 = Change nickname");
-            System.out.println("5 = Quit");
-            System.out.println("\n---------------------------\n");
-            System.out.println("[?] Enter your choice");
+            System.out.println(blue + "\n---[ " + reset + "G A M E   M E N U" + blue + " ]---" + reset);
+            System.out.println("1" + yellow + " = " + reset + "Single player");
+            System.out.println("2" + yellow + " = " + reset + "Host server");
+            System.out.println("3" + yellow + " = " + reset + "Join server");
+            System.out.println("4" + yellow + " = " + reset + "Change nickname");
+            System.out.println("5" + yellow + " = " + reset + "Quit");
+            System.out.println(line);
+            System.out.print(question + "Enter your choice: ");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
                     singleplayer();
                     break;
                 case 2:
-                    Server.server(3000);
+                    Server.server(getPort());
                     break;
                 case 3:
-                    Client.client("127.0.0.1", 3000);
+                    Client.client(getAddress(), getPort());
                     break;
                 case 4:
                     getLocalPlayerName();
                     break;
                 case 5:
-                    System.out.println("Goodbye");
+                    System.out.println(warn + "Goodbye");
                     System.exit(0);
                     break;
                 default:
@@ -44,10 +46,21 @@ public class Menu {
             }
         }
     }
+    private static String getAddress() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print(question + "Enter server address: ");
+        return scanner.nextLine();
+    }
+    private static int getPort() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(question + "Enter port number: ");
+        return Integer.parseInt(scanner.nextLine());
+    }
     public static void singleplayer () {
         for (int i = 0; i < 5; i++) {
-            System.out.println("\n---------------------------\n");
-            System.out.println("[!] Round #" + (i + 1));
+            System.out.println(line);
+            System.out.println(warn + "Round #" + (i + 1));
             Random random = new Random();
             Game.matchEvaluate(getChoose(), (byte) random.nextInt(3));
         }
@@ -55,10 +68,10 @@ public class Menu {
     }
     public static void getLocalPlayerName (){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("[?] Enter your name: ");
+        System.out.print(question + "Enter your name: ");
         Main.nickname = scanner.nextLine();
-        System.out.println("Hello, " + Main.nickname + "!");
-        System.out.println("Welcome to RockPaperScissors Game!");
+        System.out.println("Hello, " + cyan + Main.nickname + reset + "!");
+        System.out.println(warn + "Welcome to RockPaperScissors Game!");
     }
     public static void setLocalPlayerName (String name){
         Main.nickname = name;

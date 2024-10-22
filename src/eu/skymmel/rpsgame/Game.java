@@ -2,6 +2,9 @@ package eu.skymmel.rpsgame;
 
 import java.util.Scanner;
 
+import static eu.skymmel.rpsgame.assets.Colors.*;
+import static eu.skymmel.rpsgame.assets.Icons.*;
+
 public class Game {
     private static final String[] option = {"rock", "paper", "scissors"};
     // 0 - Rock
@@ -14,32 +17,31 @@ public class Game {
         System.out.println(Main.nickname + " chose " + option[player]);
         System.out.println(Main.opponent + " chose " + option[opponent]);
         if (option[player].equals(option[opponent])) {
-            System.out.println("[!] IT'S A DRAW!");
+            System.out.println(warn + "IT'S A DRAW!");
         }
         else if (
-            (option[player].equals(option[0]) && option[opponent].equals(option[2]))
-            ||
-            (option[player].equals(option[2]) && option[opponent].equals(option[1]))
-            ||
-            (option[player].equals(option[1]) && option[opponent].equals(option[0]))
+                (option[player].equals(option[0]) && option[opponent].equals(option[2]))
+                        ||
+                        (option[player].equals(option[2]) && option[opponent].equals(option[1]))
+                        ||
+                        (option[player].equals(option[1]) && option[opponent].equals(option[0]))
         ) {
             win++;
-            System.out.println("[!] " + Main.nickname + " won.");
-            System.out.println("[!] " + Main.opponent + " lost.");
-
+            System.out.println(warn + cyan + Main.nickname + reset + " won.");
+            System.out.println(warn + red + Main.opponent + reset + " lost.");
         }
         else {
             loss++;
-            System.out.println("[!] " + Main.nickname + " lost.");
-            System.out.println("[!] " + Main.opponent + " won.");
+            System.out.println(warn + red + Main.opponent + reset + " won.");
+            System.out.println(warn + cyan + Main.nickname + reset + " lost.");
         }
     }
     public static byte getChoose() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nWhat are you choose?");
-        System.out.println(" 1 Rock");
-        System.out.println(" 2 Paper");
-        System.out.println(" 3 Scissors");
+        System.out.println(green + " 1 " + reset + "Rock");
+        System.out.println(green + " 2 " + reset + "Paper");
+        System.out.println(green + " 3 " + reset + "Scissors");
         System.out.print("I choose ");
 
         byte chosen = 0;
@@ -51,16 +53,16 @@ public class Game {
                     validInput = true;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid number");
+                System.out.println(warn + "Please enter a valid number");
             }
         }
         return chosen;
     }
     public static void printGameOver(){
-        System.out.println("\n---[ G A M E   O V E R ]---\n");
-        System.out.println("[!] " + Main.nickname + " won " + Game.win + " game(s).");
-        System.out.println("[!] " + Main.opponent + " won " + Game.loss + " game(s).");
-        System.out.println("\n---------------------------\n");
+        System.out.println(blue + "\n---[ " + reset + "G A M E   O V E R" + blue + " ]---\n" + reset);
+        System.out.println(warn + cyan + Main.nickname + reset + " won " + Game.win + " game(s).");
+        System.out.println(warn + red + Main.opponent + reset + " won " + Game.loss + " game(s).");
+        System.out.println(line);
         loss = 0;
         win = 0;
     }
